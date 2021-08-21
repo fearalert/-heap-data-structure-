@@ -9,9 +9,11 @@ public:
     void insert(int key);
     void display();
     int extractMin();
+    void removeKey(int index);
     int getIndex(int key);
     bool search(int key);
     void decreaseKey(int index, int key);
+    bool change(int index, int newKey);
 
 private:
     int size;

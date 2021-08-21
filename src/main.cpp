@@ -3,8 +3,11 @@
 #include "priorityQueue.cpp"
 
 int main(){
-    MinHeap obj(5);
-    std::cout << std::endl << "Min Heap Created" << std::endl;
+    MinHeap obj(10);
+    std::cout << std::endl << "----------------------------------------" << std::endl;
+    std::cout << "\t  Min Heap Created" << std::endl;
+    std::cout << "---------------------------------------" << std::endl;
+
     std::cout << std::endl;
     obj.insert(10);
     obj.insert(5);
@@ -21,24 +24,35 @@ int main(){
     obj.display();
     obj.decreaseKey(1,3);
     obj.display();
+    obj.removeKey(7);
+    obj.removeKey(2);
+    std::cout << "After removing element from index 3, ";
+    obj.display();
 
-    HeapPriorityQueue Q(6);
-    std::cout << std::endl << "Ascending Priority Queue Implementation" << std::endl;
+    HeapPriorityQueue Q(8);
+    std::cout << std::endl << "------------------------------------------------------------------" << std::endl;
+    std::cout << "\tAscending Priority Queue Implementation" << std::endl;
+    std::cout << "------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
 
+    std::cout << "Is Empty? Yes(1)/ No(0): " << Q.isEmpty() << std::endl;
     Q.enqueue(10);
     Q.enqueue(1);
     Q.enqueue(11);
     Q.enqueue(22);
     Q.enqueue(2);
-    Q.enqueue(25);
+    Q.enqueue(5);
+    Q.enqueue(24);
     Q.enqueue(4);
-    std::cout << Q.getMinimum() << std::endl;
-    Q.dequeue();
-    std::cout << Q.getMinimum() << std::endl;
-    Q.dequeue();
-    std::cout << Q.getMinimum() << std::endl;
     Q.enqueue(14);
+    std::cout << "Is Empty? Yes(1)/ No(0): " << Q.isEmpty() << std::endl;
+    std::cout << "Is Full? Yes(1)/ No(0): " << Q.isFull() << std::endl;
+    std::cout << Q.getMinimum() << std::endl;
+    Q.dequeue();
+    std::cout << Q.getMinimum() << std::endl;
+    Q.dequeue();
+    std::cout << Q.getMinimum() << std::endl;
+    Q.enqueue(3);
 
     return 0;
 }

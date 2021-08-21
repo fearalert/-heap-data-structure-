@@ -1,7 +1,6 @@
 #include "../include/heap.h"
 #include <iostream>
 #include <cmath>
-#include <vector>
 
 MinHeap::MinHeap(int capacity){
     this->size = 0;
@@ -69,11 +68,10 @@ void MinHeap::insert(int key){
 }
 
 void MinHeap::heapifyUp(int index){
-    int i=size-1;
-    while (i != 0 && array[parent(i)] > array[i])
+    while (index != 0 && array[parent(index)] > array[index])
     {
-       swap(array[i], array[parent(i)]);
-       i = parent(i);
+       swap(array[index], array[parent(index)]);
+       index = parent(index);
     }
 }
 
@@ -115,18 +113,28 @@ int MinHeap::extractMin(){
 }
 
 void MinHeap::decreaseKey(int index, int key){
-    if (key < array[index]) {
 		array[index] = key;
 		heapifyUp(index);
-	}
 }
 
-bool MinHeap::search(int key){
+void MinHeap::removeKey(int index){
+    if(search(index)){
+        decreaseKey(index, INT8_MIN);
+        extractMin();
+    }
+    else{
+        std::cout << "Cannot remove." << std::endl;
+    }
+}
+
+bool MinHeap::search(int index){
     for (int i = 0; i < size; i++) {
-        if (array[i] == key) {
+        if (i == index) {
+            std::cout << index << " index found. " << std::endl;
             return true;
       }
     }
+    std::cout << index << " index not found. ";
     return false;
 }
 

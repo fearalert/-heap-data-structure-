@@ -12,7 +12,6 @@ public:
   void enqueue(int value);
   void dequeue();
   int getMinimum();
-  void changePriority(int index, int newValue);
 };
 
 HeapPriorityQueue::HeapPriorityQueue(int size){ 
@@ -48,6 +47,11 @@ void HeapPriorityQueue::dequeue(){
 }
 
 int HeapPriorityQueue::getMinimum(){
-    std::cout << "Minimum element of priority queue is: " << std::endl;
-    return Q->getMin();
+    if(!isEmpty()){
+        std::cout << "Minimum element of priority queue is: " << std::endl;
+        return Q->getMin();
+    }
+    else{
+        std::cout << "Cannot get minimum. Queue is empty." << std::endl;
+    }
 };

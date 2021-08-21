@@ -12,6 +12,7 @@ public:
   void enqueue(int value);
   void dequeue();
   int getMinimum();
+  void displayQueue();
 };
 
 HeapPriorityQueue::HeapPriorityQueue(int size){ 
@@ -32,7 +33,6 @@ void HeapPriorityQueue::enqueue(int value){
         std::cout << "Cannot Enqueue " << value <<" .Queue overflow." << std::endl;
     }
     else{
-        std::cout << value << " enqueued in queue." << std::endl;
         Q->insert(value);
     }
 }
@@ -41,9 +41,7 @@ void HeapPriorityQueue::dequeue(){
     if(isEmpty()){
         std::cout << "Cannot Dequeue. Queue Underflow." << std::endl;
     }
-    std::cout << "Value Dequeued is: " << Q->getMin() << std::endl;
-    Q->extractMin();
-    Q->display();
+    std::cout << "Value Dequeued is: " << Q->extractMin() << std::endl;  
 }
 
 int HeapPriorityQueue::getMinimum(){
@@ -55,3 +53,7 @@ int HeapPriorityQueue::getMinimum(){
         std::cout << "Cannot get minimum. Queue is empty." << std::endl;
     }
 };
+
+void HeapPriorityQueue::displayQueue(){
+    Q->display();
+}

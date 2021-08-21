@@ -37,17 +37,6 @@ int MinHeap::getRightChild(int index){
     return r;
 }
 
-int MinHeap::getIndex(int item){
-        int index=-1;
-        for(int i=0;i<size;i++){
-            if(array[i] == item){
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
 int MinHeap::getMin(){
     if(size == 0) return -1;
 
@@ -64,7 +53,7 @@ void MinHeap::insert(int key){
     int index = size-1;
     array[size-1]=key;
     heapifyUp(index);
-    display();
+    std::cout << "Inserted Key: " << key << std::endl;
 }
 
 void MinHeap::heapifyUp(int index){
@@ -118,16 +107,25 @@ void MinHeap::decreaseKey(int index, int key){
 }
 
 void MinHeap::removeKey(int index){
-    if(search(index)){
-        decreaseKey(index, INT8_MIN);
-        extractMin();
+    if(size==0){
+        std::cout << "Cannot remove.Empty Heap." << std::endl;
     }
-    else{
+    if(index == -1){
         std::cout << "Cannot remove." << std::endl;
     }
+    array[index] = array[size-1];
+    size--;
+    heapifyDown(index);
+    // if(searchIndex(index)){
+    //     decreaseKey(index, INT8_MIN);
+    //     extractMin();
+    // }
+    // else{
+    //     std::cout << "Cannot remove." << std::endl;
+    // }
 }
-
-bool MinHeap::search(int index){
+ 
+bool MinHeap::searchIndex(int index){
     for (int i = 0; i < size; i++) {
         if (i == index) {
             std::cout << index << " index found. " << std::endl;

@@ -11,6 +11,9 @@ public:
     void removeKey(int index);
     void decreaseKey(int index, int key);
     void display();
+    void swap(int &a, int &b);
+    void heapifyDown(int index);
+    void heapifyUp(int index);
 
 private:
     int size;
@@ -19,8 +22,5 @@ private:
     int parent(int index);
     int getLeftChild(int index);
     int getRightChild(int index);
-    void swap(int &a, int &b);
-    void heapifyDown(int index);
-    void heapifyUp(int index);
-    bool searchIndex(int index);
+   
 };

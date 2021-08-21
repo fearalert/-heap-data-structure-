@@ -2,48 +2,58 @@
 #include <iostream>
 #include <cmath>
 
+//constructor
 MinHeap::MinHeap(int capacity){
-    this->size = 0;
+    this->size = 0; // initially size is set as 0
     this->capacity = capacity;
-    array = new int[capacity];
+    array = new int[capacity]; // array of max capacity
 }
 
+// function to swap
 void MinHeap::swap(int &a, int &b){
     a = a+b;
     b = a-b;
     a = a-b;
 }
 
+//checks if the heap is empty or not.
 bool MinHeap::isEmpty(){
     return size == 0;
 }
 
+//checks if the heap is full or not.
 bool MinHeap::isFull(){
     return size == capacity;
 }
 
+// returns the index of the parent node of a child node
 int MinHeap::parent(int index){
     int p = (index-1)/2;
     return p;
 }
 
+// returns the index of the left child node of a parent node
 int MinHeap::getLeftChild(int index){
     int l = (2*index)+1;
     return l;
 }
 
+// returns the index of the right child node of a parent node
 int MinHeap::getRightChild(int index){
     int r = (2*index)+2;
     return r;
 }
 
+// returns the smallest(root) element of the heap
 int MinHeap::getMin(){
     if(size == 0) return -1;
 
     return this->array[0];
 }
 
+//function to insert key to the Heap.
 void MinHeap::insert(int key){
+    // if the heap is full. we cannot insert.
     if(size==capacity) {
         std::cout << "Cannot insert. Size Full" << std::endl;
         return;
@@ -52,10 +62,13 @@ void MinHeap::insert(int key){
     size++;
     int index = size-1;
     array[size-1]=key;
+    
+    // move Up to maintain heap property   
     heapifyUp(index);
     std::cout << "Inserted Key: " << key << std::endl;
 }
 
+// This function will keep moving the node up the tree until the heap property is restored.
 void MinHeap::heapifyUp(int index){
     while (index != 0 && array[parent(index)] > array[index])
     {
@@ -64,6 +77,7 @@ void MinHeap::heapifyUp(int index){
     }
 }
 
+// This function will keep moving the node down the tree until the heap property is restored.
 void MinHeap::heapifyDown(int index){
     if(size == 1){
         std::cout << "Single element in the MinHeap" << std::endl;
@@ -87,6 +101,7 @@ void MinHeap::heapifyDown(int index){
     }
 }
 
+// This function removes and returns the element which is the smallest among all.
 int MinHeap::extractMin(){
     if(!isEmpty()){
         int index = 0;
@@ -101,11 +116,15 @@ int MinHeap::extractMin(){
     }
 }
 
+// function that decreases the value of element;s key to new value at a node
 void MinHeap::decreaseKey(int index, int key){
 		array[index] = key;
+
+        // move Up to maintain heap property 
 		heapifyUp(index);
 }
 
+// function to remove key from the selected index
 void MinHeap::removeKey(int index){
     if(size==0){
         std::cout << "Cannot remove.Empty Heap." << std::endl;
@@ -116,26 +135,9 @@ void MinHeap::removeKey(int index){
     array[index] = array[size-1];
     size--;
     heapifyDown(index);
-    // if(searchIndex(index)){
-    //     decreaseKey(index, INT8_MIN);
-    //     extractMin();
-    // }
-    // else{
-    //     std::cout << "Cannot remove." << std::endl;
-    // }
 }
  
-bool MinHeap::searchIndex(int index){
-    for (int i = 0; i < size; i++) {
-        if (i == index) {
-            std::cout << index << " index found. " << std::endl;
-            return true;
-      }
-    }
-    std::cout << index << " index not found. ";
-    return false;
-}
-
+// function that displays every element of Heap
 void MinHeap::display(){
     std::cout << "The elements are: " << std::endl;
     for(int index = 0; index < size; index++){

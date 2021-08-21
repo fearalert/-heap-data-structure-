@@ -6,7 +6,7 @@ private:
 
 public:
   HeapPriorityQueue(int size);
-  ~HeapPriorityQueue() { delete Q; }
+  ~HeapPriorityQueue() { delete Q; }// destructor
   bool isEmpty();
   bool isFull();
   void enqueue(int value);
@@ -15,18 +15,22 @@ public:
   void displayQueue();
 };
 
+// constructor for allocation of size
 HeapPriorityQueue::HeapPriorityQueue(int size){ 
     Q = new MinHeap(size); 
 }
 
+// checks if priority queue is empty
 bool HeapPriorityQueue::isEmpty(){
     Q->isEmpty();
 }
 
+//checks if priority queue is full.
 bool HeapPriorityQueue::isFull(){
     Q->isFull();
 }
 
+// enqueue elements to priority queue
 void HeapPriorityQueue::enqueue(int value){
     if(isFull())
     {
@@ -37,6 +41,7 @@ void HeapPriorityQueue::enqueue(int value){
     }
 }
 
+// dequeue the smallest element(i.e. element with  higher priority)
 void HeapPriorityQueue::dequeue(){
     if(isEmpty()){
         std::cout << "Cannot Dequeue. Queue Underflow." << std::endl;
@@ -44,9 +49,9 @@ void HeapPriorityQueue::dequeue(){
     std::cout << "Value Dequeued is: " << Q->extractMin() << std::endl;  
 }
 
+// returns the smallest element in the priority queue
 int HeapPriorityQueue::getMinimum(){
     if(!isEmpty()){
-        std::cout << "Minimum element of priority queue is: " << std::endl;
         return Q->getMin();
     }
     else{
@@ -54,6 +59,7 @@ int HeapPriorityQueue::getMinimum(){
     }
 };
 
+// function that displays the ascending priority queue
 void HeapPriorityQueue::displayQueue(){
     Q->display();
 }

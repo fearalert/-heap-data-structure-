@@ -4,6 +4,9 @@ class MinHeap{
 public:
     MinHeap();
     MinHeap(int capacity);
+    ~MinHeap(){
+        delete []array;
+    }
     bool isEmpty();
     bool isFull();
     int getMin();

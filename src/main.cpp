@@ -25,6 +25,7 @@ int main(){
     std::cout << "After extracting minimum, ";
     obj.display();
     obj.decreaseKey(1,3);
+    std::cout << "After decreasing value of index 1, ";
     obj.display();
     obj.removeKey(3);
     std::cout << "After removing element from index 3, ";    

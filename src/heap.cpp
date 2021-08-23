@@ -10,11 +10,11 @@ MinHeap::MinHeap(int capacity){
 }
 
 // function to swap
-void MinHeap::swap(int &a, int &b){
-    a = a+b;
-    b = a-b;
-    a = a-b;
-}
+// void MinHeap::swap(int &a, int &b){
+//     a = a+b;
+//     b = a-b;
+//     a = a-b;
+// }
 
 //checks if the heap is empty or not.
 bool MinHeap::isEmpty(){
@@ -28,7 +28,7 @@ bool MinHeap::isFull(){
 
 // returns the index of the parent node of a child node
 int MinHeap::parent(int index){
-    int p = (index-1)/2;
+    int p = floor((index-1)/2);
     return p;
 }
 
@@ -72,7 +72,7 @@ void MinHeap::insert(int key){
 void MinHeap::heapifyUp(int index){
     while (index != 0 && array[parent(index)] > array[index])
     {
-       swap(array[index], array[parent(index)]);
+       std::swap(array[index], array[parent(index)]);
        index = parent(index);
     }
 }
@@ -93,9 +93,8 @@ void MinHeap::heapifyDown(int index){
         if(right < size && array[right] < array[minimum]){
             minimum = right;
         }
-        
         if(minimum != index){
-            swap(array[minimum],array[index]);
+            std::swap(array[minimum], array[index]);
             heapifyDown(minimum);
         }
     }
@@ -106,7 +105,7 @@ int MinHeap::extractMin(){
     if(!isEmpty()){
         int index = 0;
         int minimum = array[index];
-        swap(array[index], array[size-1]);
+        std::swap(array[index], array[size-1]);
         size--;
         heapifyDown(index);
         return minimum;
@@ -116,12 +115,14 @@ int MinHeap::extractMin(){
     }
 }
 
-// function that decreases the value of element;s key to new value at a node
+// function that decreases the value of element's key to new value at a node
 void MinHeap::decreaseKey(int index, int key){
-		array[index] = key;
+    if(key < array[index]){
+        array[index] = key;
 
         // move Up to maintain heap property 
 		heapifyUp(index);
+    }	
 }
 
 // function to remove key from the selected index
@@ -132,9 +133,11 @@ void MinHeap::removeKey(int index){
     if(index == -1){
         std::cout << "Cannot remove." << std::endl;
     }
-    array[index] = array[size-1];
-    size--;
-    heapifyDown(index);
+    if(index < size){
+        std::swap(array[index], array[size-1]);
+        size--;
+        heapifyDown(index);
+    }
 }
  
 // function that displays every element of Heap
